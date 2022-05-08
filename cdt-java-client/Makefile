@@ -2,7 +2,7 @@
 MVN=mvn
 
 SONAR_HOST=http://localhost:9999
-SONAR_COVERAGE_EXCLUSIONS="**/com/github/kklisura/cdt/protocol/**/*,**/com/github/kklisura/cdt/App.java"
+SONAR_COVERAGE_EXCLUSIONS="**/io/github/sskorol/cdt/protocol/**/*,**/io/github/sskorol/cdt/App.java"
 
 sonar-analysis:
 	# Running sonar analysis
