@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.github.kklisura.cdt</groupId>
+        <groupId>io.github.sskorol</groupId>
         <artifactId>ctd-java-client-root</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
@@ -15,17 +15,17 @@
 
     <name>cdt-protocol-parser</name>
     <description>Chrome DevTools protocol parser</description>
-    <url>https://github.com/kklisura/chrome-devtools-java-client</url>
+    <url>https://github.com/sskorol/chrome-devtools-java-client</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
 
-        <lombok.version>1.18.2</lombok.version>
+        <lombok.version>1.18.24</lombok.version>
         <java.parser.core.version>3.5.11</java.parser.core.version>
-        <jackson.version>2.11.3</jackson.version>
-        <junit.version>4.13.1</junit.version>
+        <jackson.version>2.13.2</jackson.version>
+        <junit.version>4.13.2</junit.version>
         <jsonassert.version>1.5.0</jsonassert.version>
     </properties>
 
@@ -50,7 +50,7 @@
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>${jackson.version}</version>
+            <version>${jackson.version}.2</version>
         </dependency>
 
         <dependency>

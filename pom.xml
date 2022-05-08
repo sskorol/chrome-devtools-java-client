@@ -2,14 +2,14 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.github.kklisura.cdt</groupId>
+    <groupId>io.github.sskorol</groupId>
     <artifactId>ctd-java-client-root</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>ctd-java-client-root</name>
     <description>Chrome DevTools java client</description>
-    <url>https://github.com/kklisura/chrome-devtools-java-client</url>
+    <url>https://github.com/sskorol/chrome-devtools-java-client</url>
 
     <modules>
         <module>cdt-protocol-parser</module>
@@ -30,25 +30,62 @@
             <name>Kenan Klisura</name>
             <email>kklisura@hotmail.com</email>
         </developer>
+        <developer>
+            <name>Sergey Korol</name>
+            <email>serhii.s.korol@gmail.com</email>
+        </developer>
     </developers>
 
     <organization>
-        <name>Kenan Klisura</name>
-        <url>https://kklisura.com</url>
+        <name>Sergey Korol</name>
+        <url>https://sskorol.github.io/online-cv/</url>
     </organization>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.inceptionYear>2018</project.inceptionYear>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
     </properties>
 
     <build>
         <pluginManagement>
             <plugins>
                 <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.10.1</version>
+                    <configuration>
+                        <source>${maven.compiler.source}</source>
+                        <target>${maven.compiler.target}</target>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>3.0.0-M6</version>
+                    <configuration>
+                        <argLine>
+                            --add-exports jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED
+                            --add-exports jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED
+                            --add-exports jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED
+                            --add-exports jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED
+                            --add-exports jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED
+                            --add-opens java.base/java.lang=ALL-UNNAMED
+                            --add-opens java.base/java.lang.reflect=ALL-UNNAMED
+                            --add-opens java.base/java.util=ALL-UNNAMED
+                            --add-opens java.base/java.util.regex=ALL-UNNAMED
+                            --add-opens java.base/java.util.concurrent=ALL-UNNAMED
+                            --add-opens java.base/java.io=ALL-UNNAMED
+                            --add-opens java.base/sun.nio.fs=ALL-UNNAMED
+                            --add-opens java.base/java.nio.file=ALL-UNNAMED
+                        </argLine>
+                    </configuration>
+                </plugin>
+                <plugin>
                     <!-- This plugin is also present in cdt-java-client, so be sure to copy any changes here to that module as well -->
                     <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>license-maven-plugin</artifactId>
+                        <artifactId>license-maven-plugin</artifactId>
                     <version>2.0.0</version>
                     <executions>
                         <execution>
@@ -93,9 +130,9 @@
                 </plugin>
                 <plugin>
                     <!-- This plugin is also present in cdt-java-client, so be sure to copy any changes here to that module as well -->
-                    <groupId>com.coveo</groupId>
+                    <groupId>com.spotify.fmt</groupId>
                     <artifactId>fmt-maven-plugin</artifactId>
-                    <version>2.9.1</version>
+                    <version>2.18</version>
                     <executions>
                         <execution>
                             <goals>

@@ -5,25 +5,29 @@
     <!-- NOTE(kklisura): Do not add parent tag here, since it gets deployed (via mvn deploy)[at least on snapshot repo],
          so clients won't be able to pull it unless parent is also deployed -->
 
-    <groupId>com.github.kklisura.cdt</groupId>
+    <groupId>io.github.sskorol</groupId>
     <artifactId>cdt-java-client</artifactId>
-    <version>4.0.0</version>
+    <version>5.0.0</version>
     <packaging>jar</packaging>
 
     <name>cdt-java-client</name>
-    <description>Chrome DevTools java client</description>
-    <url>https://github.com/kklisura/chrome-devtools-java-client</url>
+    <description>Chrome DevTools java client: JDK 17 compatible fork with recent protocol updates and minor improvements</description>
+    <url>https://github.com/sskorol/chrome-devtools-java-client</url>
 
     <developers>
         <developer>
             <name>Kenan Klisura</name>
             <email>kklisura@hotmail.com</email>
         </developer>
+        <developer>
+            <name>Sergey Korol</name>
+            <email>serhii.s.korol@gmail.com</email>
+        </developer>
     </developers>
 
     <organization>
-        <name>Kenan Klisura</name>
-        <url>https://kklisura.com</url>
+        <name>Sergey Korol</name>
+        <url>https://sskorol.github.io/online-cv/</url>
     </organization>
 
     <licenses>
@@ -35,9 +39,9 @@
     </licenses>
 
     <scm>
-        <connection>scm:git:git://github.com/kklisura/chrome-devtools-java-client.git</connection>
-        <developerConnection>scm:git:ssh://github.com:kklisura/chrome-devtools-java-client.git</developerConnection>
-        <url>http://github.com/kklisura/chrome-devtools-java-client/tree/master</url>
+        <connection>scm:git:git://github.com/sskorol/chrome-devtools-java-client.git</connection>
+        <developerConnection>scm:git:ssh://github.com:sskorol/chrome-devtools-java-client.git</developerConnection>
+        <url>https://github.com/sskorol/chrome-devtools-java-client/tree/master</url>
     </scm>
 
     <distributionManagement>
@@ -53,20 +57,19 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
 
         <project.inceptionYear>2018</project.inceptionYear>
 
-        <jackson.version>2.11.3</jackson.version>
-        <websocket.api.version>1.1</websocket.api.version>
-        <tyrus.version>1.13.1</tyrus.version>
+        <jackson.version>2.13.2</jackson.version>
+        <tyrus.version>2.0.2</tyrus.version>
         <javassist.version>3.24.1-GA</javassist.version>
-        <slf4j.version>1.7.25</slf4j.version>
+        <slf4j.version>1.7.36</slf4j.version>
 
-        <logback.version>1.2.3</logback.version>
-        <junit.version>4.13.1</junit.version>
-        <jacoco.version>0.8.0</jacoco.version>
+        <logback.version>1.2.11</logback.version>
+        <junit.version>4.13.2</junit.version>
+        <jacoco.version>0.8.8</jacoco.version>
         <easy.mock.version>3.4</easy.mock.version>
         <powermock.version>1.6.6</powermock.version>
         <jsonassert.version>1.5.0</jsonassert.version>
@@ -74,11 +77,6 @@
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>javax.websocket</groupId>
-            <artifactId>javax.websocket-api</artifactId>
-            <version>${websocket.api.version}</version>
-        </dependency>
         <dependency>
             <groupId>org.glassfish.tyrus</groupId>
             <artifactId>tyrus-container-grizzly-client</artifactId>
@@ -122,7 +120,7 @@
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>${jackson.version}</version>
+            <version>${jackson.version}.2</version>
         </dependency>
 
         <dependency>
@@ -140,13 +138,19 @@
         <dependency>
             <groupId>org.easymock</groupId>
             <artifactId>easymock</artifactId>
-            <version>${easy.mock.version}</version>
+            <version>4.3</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.powermock</groupId>
+            <artifactId>powermock-api-easymock</artifactId>
+            <version>2.0.9</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.powermock</groupId>
             <artifactId>powermock-module-junit4</artifactId>
-            <version>${powermock.version}</version>
+            <version>2.0.9</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -160,6 +164,12 @@
             <artifactId>tyrus-server</artifactId>
             <version>${tyrus.version}</version>
             <scope>test</scope>
+        </dependency>
+        <!-- Fixed vulnerability from a transitive dependency -->
+        <dependency>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcprov-jdk15on</artifactId>
+            <version>1.70</version>
         </dependency>
         <dependency>
             <groupId>com.squareup.okhttp</groupId>
@@ -184,7 +194,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
-                        <version>2.20.1</version>
+                        <version>3.0.0-M6</version>
                         <configuration>
                             <systemPropertyVariables>
                                 <jacoco-agent.destfile>target/jacoco.exec</jacoco-agent.destfile>
@@ -227,7 +237,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-source-plugin</artifactId>
-                        <version>3.0.1</version>
+                        <version>3.2.0</version>
                         <executions>
                             <execution>
                                 <id>attach-sources</id>
@@ -240,7 +250,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-javadoc-plugin</artifactId>
-                        <version>3.0.0</version>
+                        <version>3.4.0</version>
                         <executions>
                             <execution>
                                 <id>attach-javadocs</id>
@@ -256,7 +266,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
-                        <version>1.6</version>
+                        <version>3.0.1</version>
                         <executions>
                             <execution>
                                 <id>sign-artifacts</id>
@@ -283,6 +293,41 @@
             </resource>
         </resources>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.10.1</version>
+                <configuration>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
+                    <compilerArgs>
+                        <arg>--add-exports=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED</arg>
+                        <arg>--add-opens=java.base/java.lang=ALL-UNNAMED</arg>
+                        <arg>--add-opens=java.base/java.nio.file=ALL-UNNAMED</arg>
+                    </compilerArgs>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0-M6</version>
+                <configuration>
+                    <argLine>
+                        --add-exports jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED
+                        --add-opens java.base/java.lang=ALL-UNNAMED
+                        --add-opens java.base/java.lang.reflect=ALL-UNNAMED
+                        --add-opens java.base/java.util=ALL-UNNAMED
+                        --add-opens java.base/java.util.regex=ALL-UNNAMED
+                        --add-opens java.base/java.util.concurrent=ALL-UNNAMED
+                        --add-opens java.base/java.io=ALL-UNNAMED
+                        --add-opens java.base/sun.nio.fs=ALL-UNNAMED
+                        --add-opens java.base/java.nio.file=ALL-UNNAMED
+                    </argLine>
+                    <systemPropertyVariables>
+                        <jacoco-agent.destfile>target/jacoco.exec</jacoco-agent.destfile>
+                    </systemPropertyVariables>
+                </configuration>
+            </plugin>
             <plugin>
                 <!-- This plugin is also present in cdt-java-client, so be sure to copy any changes here to that module as well -->
                 <groupId>org.codehaus.mojo</groupId>
@@ -330,9 +375,9 @@
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>com.coveo</groupId>
+                <groupId>com.spotify.fmt</groupId>
                 <artifactId>fmt-maven-plugin</artifactId>
-                <version>2.9.1</version>
+                <version>2.18</version>
                 <executions>
                     <execution>
                         <goals>

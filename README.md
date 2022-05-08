@@ -1,5 +1,10 @@
 # Chrome DevTools Java Client
 
+## About this repository
+
+This is a fork of the official [Chrome DevTools Java Client](https://github.com/kklisura/chrome-devtools-java-client). The code is written by [kklisura](https://github.com/kklisura).
+This version is adopted to JDK 17, has the most recent protocol updates (May 2022) and introduces minor API improvements. Note that the root package path was changed to `io.github.sskorol` to avoid conflicts with the official client.
+
 ## Description
 
 Chrome DevTools Java Client is a DevTools client - in Java. (: It can be used for *instrumenting, inspecting, debuging and profiling Chromium, Chrome and other Blink-based browsers.* [1]
@@ -14,6 +19,8 @@ For more information on DevTools, see https://chromedevtools.github.io/devtools-
 
 [v4.0.0](https://github.com/kklisura/chrome-devtools-java-client/tree/v4.0.0) tested on Google Chrome Version 90.0.4430.212. Protocol files from [dev-tools-protocol#987bbb1124](https://github.com/ChromeDevTools/devtools-protocol/tree/987bbb1124f098c7e4bca6b2f91c7e96b350a8e6/json)
 
+[v5.0.0](https://github.com/sskorol/chrome-devtools-java-client/tree/v5.0.0) tested on Chromium Version 100.0. Protocol files from [dev-tools-protocol#1dd3de6dbc](https://github.com/ChromeDevTools/devtools-protocol/tree/1dd3de6dbc47da9bc6a36629017bbcb06e6a2726/json)
+
 [1] https://chromedevtools.github.io/devtools-protocol/.
 
 ## Usage
@@ -22,23 +29,23 @@ Add the following dependency to your `pom.xml`:
 
 ```xml
 <dependency>
-  <groupId>com.github.kklisura.cdt</groupId>
+  <groupId>io.github.sskorol</groupId>
   <artifactId>cdt-java-client</artifactId>
-  <version>4.0.0</version>
+  <version>5.0.0</version>
 </dependency>
 ```
 
 You can use following code, taken from, `LogRequestsExample`:
 
 ```java
-package com.github.kklisura.cdt.examples;
+package io.github.sskorol.cdt.examples;
 
-import com.github.kklisura.cdt.launch.ChromeLauncher;
-import com.github.kklisura.cdt.protocol.commands.Network;
-import com.github.kklisura.cdt.protocol.commands.Page;
-import com.github.kklisura.cdt.services.ChromeDevToolsService;
-import com.github.kklisura.cdt.services.ChromeService;
-import com.github.kklisura.cdt.services.types.ChromeTab;
+import io.github.sskorol.cdt.launch.ChromeLauncher;
+import io.github.sskorol.cdt.protocol.commands.Network;
+import io.github.sskorol.cdt.protocol.commands.Page;
+import io.github.sskorol.cdt.services.ChromeDevToolsService;
+import io.github.sskorol.cdt.services.ChromeService;
+import io.github.sskorol.cdt.services.types.ChromeTab;
 
 /**
  * Log requests example with DevTools java client.
@@ -86,14 +93,14 @@ public class LogRequestsExample {
     network.enable();
 
     // Navigate to github.com.
-    page.navigate("http://github.com");
+    page.navigate("https://github.com");
 
     devToolsService.waitUntilClosed();
   }
 }
 ```
 
-For more examples, see [examples](cdt-examples/src/main/java/com/github/kklisura/cdt/examples).
+For more examples, see [examples](cdt-examples/src/main/java/io/github/sskorol/cdt/examples).
 
 ## Known-issues
 
@@ -103,11 +110,11 @@ For more examples, see [examples](cdt-examples/src/main/java/com/github/kklisura
 
 **Why:** This is due to underlying WebSocket library having 4MB buffer for receiving data from browser.
 
-**How to fix:** With the version `2.1.0` and above, this buffer was increased to 8MB and can be further increased if necessary by setting the appropriate [configuration property](cdt-examples/src/main/java/com/github/kklisura/cdt/examples/IncreasedIncomingBufferInTyrusExample.java).
+**How to fix:** With the version `2.1.0` and above, this buffer was increased to 8MB and can be further increased if necessary by setting the appropriate [configuration property](cdt-examples/src/main/java/io/github/sskorol/cdt/examples/IncreasedIncomingBufferInTyrusExample.java).
 
 ## Debugging chrome
 
-In order to debug chrome when using this library, set the logger `com.github.kklisura.cdt.launch.chrome.output` to `DEBUG` level. See [ChromeLoggingExample](cdt-examples/src/main/java/com/github/kklisura/cdt/examples/ChromeLoggingExample.java) for more information. Be sure to remove or turn the logger off, when done.
+In order to debug chrome when using this library, set the logger `io.github.sskorol.cdt.launch.chrome.output` to `DEBUG` level. See [ChromeLoggingExample](cdt-examples/src/main/java/io/github/sskorol/cdt/examples/ChromeLoggingExample.java) for more information. Be sure to remove or turn the logger off, when done.
 
 ## Running unit tests
 
@@ -117,7 +124,7 @@ In order to debug chrome when using this library, set the logger `com.github.kkl
 
 `make sonar-analysis`
 
-## Download latest protocol
+## Download the latest protocol
 
 Run following:
 ```

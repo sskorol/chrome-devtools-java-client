@@ -3,35 +3,35 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.github.kklisura.cdt</groupId>
+        <groupId>io.github.sskorol</groupId>
         <artifactId>ctd-java-client-root</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <groupId>com.github.kklisura.cdt.examples</groupId>
+    <groupId>io.github.sskorol.examples</groupId>
     <artifactId>cdt-examples</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>cdt-examples</name>
     <description>Chrome DevTools java client examples</description>
-    <url>https://github.com/kklisura/chrome-devtools-java-client</url>
+    <url>https://github.com/sskorol/chrome-devtools-java-client</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
 
-        <logback.version>1.2.3</logback.version>
-        <jackson.version>2.11.3</jackson.version>
-        <common.codec.version>1.11</common.codec.version>
+        <logback.version>1.2.11</logback.version>
+        <jackson.version>2.13.2</jackson.version>
+        <common.codec.version>1.15</common.codec.version>
     </properties>
 
     <dependencies>
         <dependency>
-            <groupId>com.github.kklisura.cdt</groupId>
+            <groupId>io.github.sskorol</groupId>
             <artifactId>cdt-java-client</artifactId>
-            <version>4.0.0</version>
+            <version>5.0.0</version>
         </dependency>
 
         <dependency>
@@ -63,8 +63,9 @@
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>com.coveo</groupId>
+                <groupId>com.spotify.fmt</groupId>
                 <artifactId>fmt-maven-plugin</artifactId>
+                <version>2.18</version>
             </plugin>
         </plugins>
     </build>
@@ -85,6 +86,11 @@
             </snapshots>
             <url>https://oss.sonatype.org/content/repositories/snapshots</url>
             <layout>default</layout>
+        </repository>
+        <repository>
+            <id>mvn-local</id>
+            <name>Maven Local</name>
+            <url>file://${user.home}/.m2/repository</url>
         </repository>
     </repositories>
 </project>
